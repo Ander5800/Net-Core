@@ -11,7 +11,7 @@ namespace GAP.Database.User
     {
         public void Configure(EntityTypeBuilder<UserEntity> builder)
         {
-            builder.ToTable("Users", "User");
+            builder.ToTable("Users");
 
             builder.HasKey(x => x.UserId);
 
