@@ -1,8 +1,7 @@
 ﻿using DotNetCore.EntityFrameworkCore;
-using GAP.Database.Database;
 using GAP.Domain;
 
-namespace GAP.Database.Customer
+namespace GAP.Infrastructure
 {
     public sealed class CustomerRepository : EntityFrameworkCoreRelationalRepository<CustomerEntity>, ICustomerRepository
     {

@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GAP.Database\GAP.Infrastructure.csproj" />
+    <ProjectReference Include="..\GAP.Domain\GAP.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

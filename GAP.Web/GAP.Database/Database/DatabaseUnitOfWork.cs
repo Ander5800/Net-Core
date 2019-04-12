@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace GAP.Database.Database
+namespace GAP.Infrastructure
 {
     public sealed class DatabaseUnitOfWork : IDatabaseUnitOfWork
     {

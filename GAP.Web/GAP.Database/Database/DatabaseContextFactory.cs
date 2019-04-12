@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace GAP.Database.Database
+namespace GAP.Infrastructure
 {
     public sealed class DatabaseContextFactory : IDesignTimeDbContextFactory<DatabaseContext>
     {

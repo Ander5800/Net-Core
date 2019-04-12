@@ -1,11 +1,8 @@
 ﻿using GAP.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace GAP.Database.User
+namespace GAP.Infrastructure
 {
     public sealed class UserEntityConfiguration : IEntityTypeConfiguration<UserEntity>
     {

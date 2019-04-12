@@ -1,11 +1,8 @@
 ﻿using GAP.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace GAP.Database.Customer
+namespace GAP.Infrastructure
 {
     public sealed class CustomerEntityConfiguration : IEntityTypeConfiguration<CustomerEntity>
     {
@@ -28,6 +25,8 @@ namespace GAP.Database.Customer
                 y.Property(x => x.Name).IsRequired().HasMaxLength(100);
                 y.Property(x => x.Surname).IsRequired().HasMaxLength(200);
             });
+
+            builder.HasMany(x => x.Appointments).WithOne(x => x.Customer).HasForeignKey(x => x.CustomerId);
         }
     }
 }

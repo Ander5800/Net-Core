@@ -1,6 +1,7 @@
 ﻿using GAP.Domain.ValueObjects;
 using GAP.Model;
 using System;
+using System.Collections.Generic;
 
 namespace GAP.Domain
 {
@@ -39,7 +40,8 @@ namespace GAP.Domain
 
         public DocumentType DocumentType { get; private set; }
 
-
+        public ICollection<AppointmentEntity> Appointments { get; private set; }
+        
         public void Add()
         {
             CustomerId = 0;

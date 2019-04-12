@@ -1,10 +1,9 @@
 ﻿using DotNetCore.EntityFrameworkCore;
-using GAP.Database.Database;
 using GAP.Domain;
 using GAP.Model;
 using System.Threading.Tasks;
 
-namespace GAP.Database.User
+namespace GAP.Infrastructure
 {
     public sealed class UserRepository : EntityFrameworkCoreRelationalRepository<UserEntity>, IUserRepository
     {

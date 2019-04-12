@@ -1,7 +1,7 @@
 ﻿using DotNetCore.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace GAP.Database.Database
+namespace GAP.Infrastructure
 {
     public sealed class DatabaseContext : DbContext
     {

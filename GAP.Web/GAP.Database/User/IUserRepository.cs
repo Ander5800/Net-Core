@@ -3,7 +3,7 @@ using GAP.Domain;
 using GAP.Model;
 using System.Threading.Tasks;
 
-namespace GAP.Database.User
+namespace GAP.Infrastructure
 {
     public interface IUserRepository : IRelationalRepository<UserEntity>
     {

@@ -2,7 +2,7 @@
 using GAP.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace GAP.Database.Database
+namespace GAP.Infrastructure
 {
     public static class DatabaseContextSeed
     {
