@@ -1,5 +1,4 @@
-﻿namespace GAP.Model.Models.TokenModel
-{
+﻿namespace GAP.Model { 
     public class TokenModel
     {
         public TokenModel(string token)

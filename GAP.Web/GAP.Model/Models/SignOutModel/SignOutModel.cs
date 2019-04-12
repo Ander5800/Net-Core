@@ -1,4 +1,4 @@
-﻿namespace GAP.Model.Models.SignOutModel
+﻿namespace GAP.Model
 {
     public class SignOutModel
     {

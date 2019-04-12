@@ -9,9 +9,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotNetCore.AspNetCore" Version="7.21.0" />
+    <PackageReference Include="DotNetCore.IoC" Version="7.8.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GAP.Application\GAP.Application.csproj" />
+    <ProjectReference Include="..\GAP.Database\GAP.Database.csproj" />
   </ItemGroup>
 
 </Project>

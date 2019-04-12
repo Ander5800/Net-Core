@@ -1,4 +1,4 @@
-﻿namespace GAP.Model.Enums
+﻿namespace GAP.Model
 {
     public enum Roles
     {

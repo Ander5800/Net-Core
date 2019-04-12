@@ -4,4 +4,12 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="DotNetCore.Validation" Version="7.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GAP.CrossCutting\GAP.CrossCutting.csproj" />
+  </ItemGroup>
+
 </Project>

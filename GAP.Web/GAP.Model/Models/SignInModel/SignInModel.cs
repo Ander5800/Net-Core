@@ -1,5 +1,4 @@
-﻿namespace GAP.Model.Models.SignInModel
-{
+﻿namespace GAP.Model { 
     public class SignInModel
     {
         public string Login { get; set; }

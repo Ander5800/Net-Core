@@ -1,9 +1,6 @@
-﻿using GAP.Domain.User;
-using GAP.Model.Enums;
+﻿using GAP.Domain;
+using GAP.Model;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GAP.Database.Database
 {

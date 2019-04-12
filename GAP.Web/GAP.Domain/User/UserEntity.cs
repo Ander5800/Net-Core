@@ -1,15 +1,15 @@
 ﻿using GAP.Domain.ValueObjects;
-using GAP.Model.Enums;
-using System.Collections.Generic;
+using GAP.Model;
+using System.ComponentModel.DataAnnotations;
 
-namespace GAP.Domain.User
+namespace GAP.Domain
 {
     public class UserEntity
     {
         public UserEntity
         (
             long userId,
-            string fullName,
+            FullName fullName,
             string email,
             SignIn signIn,
             Roles roles,
@@ -28,7 +28,7 @@ namespace GAP.Domain.User
 
         public long UserId { get; private set; }
 
-        public string FullName { get; private set; }
+        public FullName FullName { get; private set; }
 
         public string Email { get; private set; }
 
@@ -37,8 +37,6 @@ namespace GAP.Domain.User
         public Roles Roles { get; private set; }
 
         public Status Status { get; private set; }
-
-        //public ICollection<UserLogEntity> UsersLogs { get; private set; }
 
         public void Add()
         {
@@ -51,11 +49,5 @@ namespace GAP.Domain.User
         {
             Status = Status.Inactive;
         }
-
-        //public void Update(UpdateUserModel updateUserModel)
-        //{
-        //    FullName = new FullName(updateUserModel.FullName.Name, updateUserModel.FullName.Surname);
-        //    Email = updateUserModel.Email;
-        //}
     }
 }
