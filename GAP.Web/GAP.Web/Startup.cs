@@ -1,27 +1,40 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using DotNetCore.AspNetCore;
+using DotNetCore.IoC;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Text;
 
 namespace GAP.Web
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IHostingEnvironment environment)
         {
-            Configuration = configuration;
+            Configuration = environment.Configuration();
+            Environment = environment;
         }
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
+
+        private IHostingEnvironment Environment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddJsonWebToken();
+            services.AddHash();
             services.AddApplicationServices();
             services.AddDatabaseContext(Configuration);
             services.AddDatabaseServices();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddDomainServices();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            //services.AddSpa();
             //services.AddDatabaseServices();
             //services.AddDatabaseContext(Configuration);
         }
@@ -37,6 +50,12 @@ namespace GAP.Web
             {
                 app.UseHsts();
             }
+
+            app.UseCors(builder =>
+            builder.WithOrigins("http://localhost:4200")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            );
 
             app.UseHttpsRedirection();
             app.UseMvc();

@@ -12,7 +12,7 @@ namespace GAP.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomersController : ControllerBase
+    public class CustomersController : BaseController
     {
         private ICustomerApplicationService CustomerApplicationService { get; }
 

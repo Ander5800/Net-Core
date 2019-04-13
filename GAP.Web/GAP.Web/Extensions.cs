@@ -2,6 +2,7 @@
 using DotNetCore.EntityFrameworkCore;
 using DotNetCore.IoC;
 using GAP.Application;
+using GAP.Domain;
 using GAP.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -17,6 +18,7 @@ namespace GAP.Web
         public static void AddApplicationServices(this IServiceCollection services)
         {
             services.AddMatchingInterface(typeof(ICustomerApplicationService).Assembly);
+            services.AddMatchingInterface(typeof(IUserApplicationService).Assembly);
         }
 
         public static void AddDatabaseContext(this IServiceCollection services, IConfiguration configuration)
@@ -34,10 +36,10 @@ namespace GAP.Web
             services.AddMatchingInterface(typeof(IDatabaseUnitOfWork).Assembly);
         }
 
-        //public static void AddDomainServices(this IServiceCollection services)
-        //{
-        //    //services.AddMatchingInterface(typeof(ICustomerDomainService).Assembly);
-        //}
+        public static void AddDomainServices(this IServiceCollection services)
+        {
+            services.AddMatchingInterface(typeof(IUserDomainService).Assembly);
+        }
 
         public static void AddJsonWebToken(this IServiceCollection services)
         {
