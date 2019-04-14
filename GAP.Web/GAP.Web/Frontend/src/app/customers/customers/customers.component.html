@@ -1,16 +1,35 @@
 <div class="content-container">
-    <div class="button-panel" *ngIf="!selected">
-        <button mat-raised-button type="button" (click)="getCustomers()" matTooltip="Refresh the customers">Refresh</button>
-        <button mat-raised-button color="primary" type="button" (click)="enableAddMode()" *ngIf="!selected" matTooltip="Add a new customer">Add</button>
+    <div class="button-panel"
+        *ngIf="!selected">
+        <button mat-raised-button
+            type="button"
+            (click)="getCustomers()"
+            matTooltip="Refresh the customers">Refresh</button>
+        <button mat-raised-button
+            color="primary"
+            type="button"
+            (click)="enableAddMode()"
+            *ngIf="!selected"
+            matTooltip="Add a new customer">Add</button>
     </div>
-    <div *ngIf="selected" class="detail-container">
-        <app-customer-detail [customer]="selected" (unselect)="close()" (add)="add($event)" (update)="update($event)"></app-customer-detail>
+    <div *ngIf="selected"
+        class="detail-container">
+        <app-customer-detail [customer]="selected"
+            (unselect)="close()"
+            (add)="add($event)"
+            (update)="update($event)"></app-customer-detail>
     </div>
-    <div *ngIf="!selected" class="list-container">
+    <div *ngIf="!selected"
+        class="list-container">
         <div *ngIf="customers">
-            <mat-spinner *ngIf="loading;else customerList" mode="indeterminate" color="accent"></mat-spinner>
+            <mat-spinner *ngIf="loading;else customerList"
+                mode="indeterminate"
+                color="accent"></mat-spinner>
             <ng-template #customerList>
-                <app-customer-list [customers]="customers" [selectedCustomer]="selected" (selected)="select($event)">
+                <app-customer-list [customers]="customers"
+                    [selectedCustomer]="selected"
+                    (selected)="select($event)"
+                    (addAppointment)="addAppointment($event)">
                 </app-customer-list>
             </ng-template>
         </div>

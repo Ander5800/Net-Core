@@ -1,0 +1,32 @@
+<div class="prueba">
+    <mat-card class="example-card">
+        <mat-card-header>
+            <mat-card-title>Login</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form class="example-form">
+                <mat-form-field class="example-full-width">
+                    <input matInput
+                        placeholder="Username"
+                        name="username"
+                        [(ngModel)]="signIn.login">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <input matInput
+                        placeholder="Password"
+                        type="password"
+                        name="password"
+                        [(ngModel)]="signIn.password">
+                </mat-form-field>
+
+            </form>
+            <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+        </mat-card-content>
+        <mat-card-actions style="text-align: end">
+            <button mat-raised-button
+                (click)="login()"
+                color="primary">Login</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

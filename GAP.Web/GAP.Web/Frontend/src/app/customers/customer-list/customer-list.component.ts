@@ -14,6 +14,7 @@ export class CustomerListComponent {
 
   @Output() deleted = new EventEmitter<Customer>();
   @Output() selected = new EventEmitter<Customer>();
+  @Output() addAppointment = new EventEmitter<Customer>();
 
   displayedColumns: string[] = ['nit', 'name', 'status', 'actions'];
 
@@ -25,5 +26,9 @@ export class CustomerListComponent {
 
   select(customer: Customer) {
     this.selected.emit(customer);
+  }
+
+  onAddAppointment(customer: Customer) {
+    this.addAppointment.emit(customer);
   }
 }

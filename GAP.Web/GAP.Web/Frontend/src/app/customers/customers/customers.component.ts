@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Customer } from '../../core';
 import { CustomerService } from '../customer.service';
 import { finalize } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customers',
@@ -14,7 +15,8 @@ export class CustomersComponent implements OnInit {
   customers: Customer[];
   loading: boolean;
 
-  constructor(private customerService: CustomerService) { }
+  constructor(private customerService: CustomerService,
+    private router: Router) { }
 
   ngOnInit() {
     this.getCustomers();
@@ -58,5 +60,9 @@ export class CustomersComponent implements OnInit {
         () =>
           (this.customers = this.customers.map(h => (h.customerId === customer.customerId ? customer : h)))
       );
+  }
+
+  addAppointment(customer: Customer) {
+    this.router.navigate(['appointments', customer.customerId]);
   }
 }

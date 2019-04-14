@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Appointment } from '../../core';
 import { finalize } from 'rxjs/operators';
 import { AppointmentService } from '../appointment.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-appointments',
@@ -15,7 +16,10 @@ export class AppointmentsComponent implements OnInit {
   appointments: Appointment[];
   loading: boolean;
 
-  constructor(private appointmentService: AppointmentService) { }
+  constructor(private appointmentService: AppointmentService,
+    private route: ActivatedRoute) {
+    this.customerId = Number(this.route.snapshot.paramMap.get('id'));
+  }
 
   ngOnInit() {
     this.getAppointments();

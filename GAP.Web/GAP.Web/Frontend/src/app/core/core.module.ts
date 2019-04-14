@@ -6,6 +6,8 @@ import { SharedModule } from '../shared/shared.module';
 import { ModalComponent } from './modal/modal.component';
 import { throwIfAlreadyLoaded } from './module-import-check';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { LoginComponent } from './login/login.component';
+import { LayoutComponent } from './layouts/layout/layout.component';
 
 @NgModule({
   imports: [
@@ -14,7 +16,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     MaterialModule,
     RouterModule // because we use <router-outlet> and routerLink
   ],
-  declarations: [ModalComponent, ToolbarComponent],
+  declarations: [ModalComponent, ToolbarComponent, LoginComponent, LayoutComponent],
   exports: [ToolbarComponent],
   entryComponents: [ModalComponent]
 })

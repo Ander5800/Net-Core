@@ -25,6 +25,7 @@ export class AppointmentService {
 
   private handleError(res: HttpErrorResponse) {
     console.error(res.error);
+    this.toastService.openSnackBar(res.error, 'Error');
     return observableThrowError(res.error || 'Server error');
   }
 

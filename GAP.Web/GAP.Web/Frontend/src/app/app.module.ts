@@ -5,11 +5,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core';
+import { LoginComponent } from './core/login/login.component';
+import { LayoutComponent } from './core/layouts/layout/layout.component';
+import { AuthGuard, } from './core/guard.service';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'customers' },
-  { path: 'customers', loadChildren: 'app/customers/customers.module#CustomersModule' },
-  { path: 'appointments', loadChildren: 'app/appointments/appointments.module#AppointmentsModule' }
+  { path: '', pathMatch: 'full', redirectTo: 'login' },
+  { path: 'login', component: LoginComponent },
+  {
+    path: '', component: LayoutComponent,
+    canActivate: [AuthGuard,],
+    children: [
+      { path: 'customers', loadChildren: 'app/customers/customers.module#CustomersModule' },
+      { path: 'appointments/:id', loadChildren: 'app/appointments/appointments.module#AppointmentsModule' }
+    ],
+  },
+
 ];
 
 @NgModule({
@@ -20,7 +31,8 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes)
   ],
+  providers: [AuthGuard],
   declarations: [AppComponent],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

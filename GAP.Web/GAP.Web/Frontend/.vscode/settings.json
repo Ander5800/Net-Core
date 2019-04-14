@@ -1,0 +1,4 @@
+{
+    "beautify.config": "jsbeautifyrc",
+    "editor.formatOnSave": true
+}
