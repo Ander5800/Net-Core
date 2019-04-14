@@ -4,4 +4,5 @@ export class Appointment {
   customerId: number;
   status: number;
   appointmentDate: Date;
+  departmentId: number;
 }

@@ -6,22 +6,14 @@
             type="button"
             (click)="getAppointments()"
             matTooltip="Refresh the appointments">Refresh</button>
-        <button mat-raised-button
-            color="primary"
-            type="button"
-            (click)="enableAddMode()"
-            *ngIf="!selected"
-            matTooltip="Add a appointment">Add</button>
     </div>
-    <div *ngIf="selected"
-        class="detail-container">
+    <div class="detail-container">
         <app-appointment-detail [appointment]="selected"
             (unselect)="close()"
             (add)="add($event)"
             (update)="update($event)"></app-appointment-detail>
     </div>
-    <div *ngIf="!selected"
-        class="list-container">
+    <div class="list-container">
         <div *ngIf="appointments">
             <mat-spinner *ngIf="loading;else appointmentList"
                 mode="indeterminate"

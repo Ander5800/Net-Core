@@ -14,7 +14,7 @@ export class AppointmentListComponent {
 
   @Output() deleted = new EventEmitter<Appointment>();
   @Output() selected = new EventEmitter<Appointment>();
-  displayedColumns: string[] = ['appointmentDate', 'status'];
+  displayedColumns: string[] = ['appointmentDate', 'department', 'actions'];
 
   constructor(public dialog: MatDialog) { }
 

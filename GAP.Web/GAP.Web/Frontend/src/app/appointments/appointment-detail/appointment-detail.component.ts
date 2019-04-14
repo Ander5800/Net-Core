@@ -8,6 +8,8 @@ import { Appointment } from '../../core';
   styleUrls: ['./appointment-detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+
+
 export class AppointmentDetailComponent implements OnChanges {
 
   @Input() appointment: Appointment;
@@ -16,17 +18,23 @@ export class AppointmentDetailComponent implements OnChanges {
   @Output() add = new EventEmitter<Appointment>();
   @Output() update = new EventEmitter<Appointment>();
 
-  @ViewChild('name') nameElement: ElementRef;
+  @ViewChild('appointmentDate') nameElement: ElementRef;
+
+  foods;
 
   addMode = false;
-
   form = this.fb.group({
-    customerId: [],
-    fullName: ['', Validators.required],
-    saying: ['']
+    appointmentDate: ['', Validators.required],
+    departmentId: ['', Validators.required]
   });
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {
+    this.foods = [
+      { value: 'steak-0', viewValue: 'Steak' },
+      { value: 'pizza-1', viewValue: 'Pizza' },
+      { value: 'tacos-2', viewValue: 'Tacos' }
+    ];
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     this.setFocus();

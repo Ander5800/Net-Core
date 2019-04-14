@@ -1,51 +1,47 @@
-<mat-card>
-    <mat-card-header>
-        <mat-card-title>Appoinment Details</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-        <form [formGroup]="form"
-            (ngSubmit)="saveAppointment(form)">
-            <div class="editfields">
-                <div [hidden]="addMode">
-                    <mat-form-field>
-                        <input matInput
-                            formControlName="id"
-                            placeholder="id"
-                            #id
-                            readonly>
-                    </mat-form-field>
-                </div>
-                <div>
-                    <mat-form-field>
-                        <input matInput
-                            formControlName="name"
-                            placeholder="name"
-                            #name
-                            (keyup.esc)="close()"
-                            (keyup.enter)="saveAppointment(form)">
-                    </mat-form-field>
-                </div>
-                <div>
-                    <mat-form-field>
-                        <textarea matInput
-                            formControlName="saying"
-                            placeholder="saying"
-                            #saying
-                            (keyup.esc)="close()"
-                            (keyup.enter)="saveAppointment(form)"></textarea>
-                    </mat-form-field>
-                </div>
+<form class="container"
+    [formGroup]="form"
+    (ngSubmit)="saveAppointment(form)">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Appoinment Details</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="container">
+
+                <mat-form-field>
+                    <input #appointmentDate
+                        matInput
+                        [matDatepicker]="dp3"
+                        placeholder="Select date"
+                        formControlName="appointmentDate"
+                        disabled>
+                    <mat-datepicker-toggle matSuffix
+                        [for]="dp3"></mat-datepicker-toggle>
+                    <mat-datepicker #dp3
+                        disabled="false"></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Select Department</mat-label>
+                    <mat-select formControlName="departmentId">
+                        <mat-option *ngFor="let food of foods"
+                            [value]="food.value">
+                            {{food.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
-            <button mat-raised-button
-                color="accent"
-                type="button"
-                (click)="close()"
-                matTooltip="Cancel all changes">Cancel</button>
-            <button mat-raised-button
-                color="primary"
-                type="submit"
-                [disabled]="form.pristine || form.invalid"
-                matTooltip="Save all changes">Save</button>
-        </form>
-    </mat-card-content>
-</mat-card>
+            <mat-card-actions style="text-align: end">
+                <button mat-raised-button
+                    color="accent"
+                    type="button"
+                    (click)="close()"
+                    matTooltip="Cancel all changes">Cancel</button>
+                <button mat-raised-button
+                    color="primary"
+                    type="submit"
+                    [disabled]="form.pristine || form.invalid"
+                    matTooltip="Add Appointment">Add</button>
+            </mat-card-actions>
+        </mat-card-content>
+    </mat-card>
+</form>
