@@ -5,12 +5,7 @@
             type="button"
             (click)="getCustomers()"
             matTooltip="Refresh the customers">Refresh</button>
-        <button mat-raised-button
-            color="primary"
-            type="button"
-            (click)="enableAddMode()"
-            *ngIf="!selected"
-            matTooltip="Add a new customer">Add</button>
+
     </div>
     <div *ngIf="selected"
         class="detail-container">

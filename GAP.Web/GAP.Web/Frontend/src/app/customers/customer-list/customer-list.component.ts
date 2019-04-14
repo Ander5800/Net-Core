@@ -16,7 +16,7 @@ export class CustomerListComponent {
   @Output() selected = new EventEmitter<Customer>();
   @Output() addAppointment = new EventEmitter<Customer>();
 
-  displayedColumns: string[] = ['nit', 'name', 'status', 'actions'];
+  displayedColumns: string[] = ['name', 'email', 'actions'];
 
   constructor(public dialog: MatDialog) { }
 
