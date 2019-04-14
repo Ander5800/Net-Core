@@ -54,6 +54,31 @@ namespace GAP.Infrastructure
                 });
             });
 
+            modelBuilder.Entity<CustomerEntity>(x =>
+            {
+                x.HasData(new
+                {
+                    CustomerId = 1L,
+                    FullName = "Anderson Chica",
+                    Email = "anderson.chica@hotmail.com"
+                }, new
+                {
+                    CustomerId = 2L,
+                    FullName = "Carlos Upegui",
+                    Email = "carlos.upegui@hotmail.com"
+                }, new
+                {
+                    CustomerId = 3L,
+                    FullName = "David Jaramillo",
+                    Email = "david.jaramillo@hotmail.com"
+                }, new
+                {
+                    CustomerId = 4L,
+                    FullName = "Juan Patiño",
+                    Email = "juan.patino@hotmail.com"
+                });
+            });
+
         }
     }
 }

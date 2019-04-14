@@ -48,25 +48,43 @@ namespace GAP.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("BirthDay");
-
-                    b.Property<int>("DocumentType");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(300);
 
-                    b.Property<string>("Nit")
-                        .IsRequired();
-
-                    b.Property<int>("Status");
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(300);
 
                     b.HasKey("CustomerId");
 
-                    b.HasIndex("Nit")
-                        .IsUnique();
-
                     b.ToTable("Customers");
+
+                    b.HasData(
+                        new
+                        {
+                            CustomerId = 1L,
+                            Email = "anderson.chica@hotmail.com",
+                            FullName = "Anderson Chica"
+                        },
+                        new
+                        {
+                            CustomerId = 2L,
+                            Email = "carlos.upegui@hotmail.com",
+                            FullName = "Carlos Upegui"
+                        },
+                        new
+                        {
+                            CustomerId = 3L,
+                            Email = "david.jaramillo@hotmail.com",
+                            FullName = "David Jaramillo"
+                        },
+                        new
+                        {
+                            CustomerId = 4L,
+                            Email = "juan.patino@hotmail.com",
+                            FullName = "Juan Patiño"
+                        });
                 });
 
             modelBuilder.Entity("GAP.Domain.DepartmentType", b =>
@@ -149,11 +167,11 @@ namespace GAP.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("GAP.Domain.CustomerEntity", b =>
+            modelBuilder.Entity("GAP.Domain.UserEntity", b =>
                 {
                     b.OwnsOne("GAP.Domain.ValueObjects.FullName", "FullName", b1 =>
                         {
-                            b1.Property<long>("CustomerEntityCustomerId")
+                            b1.Property<long>("UserEntityUserId")
                                 .ValueGeneratedOnAdd()
                                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -165,19 +183,24 @@ namespace GAP.Infrastructure.Migrations
                                 .IsRequired()
                                 .HasMaxLength(200);
 
-                            b1.HasKey("CustomerEntityCustomerId");
+                            b1.HasKey("UserEntityUserId");
 
-                            b1.ToTable("Customers");
+                            b1.ToTable("Users");
 
-                            b1.HasOne("GAP.Domain.CustomerEntity")
+                            b1.HasOne("GAP.Domain.UserEntity")
                                 .WithOne("FullName")
-                                .HasForeignKey("GAP.Domain.ValueObjects.FullName", "CustomerEntityCustomerId")
+                                .HasForeignKey("GAP.Domain.ValueObjects.FullName", "UserEntityUserId")
                                 .OnDelete(DeleteBehavior.Cascade);
-                        });
-                });
 
-            modelBuilder.Entity("GAP.Domain.UserEntity", b =>
-                {
+                            b1.HasData(
+                                new
+                                {
+                                    UserEntityUserId = 1L,
+                                    Name = "Administrator",
+                                    Surname = "Administrator"
+                                });
+                        });
+
                     b.OwnsOne("GAP.Domain.ValueObjects.SignIn", "SignIn", b1 =>
                         {
                             b1.Property<long>("UserEntityUserId")
@@ -210,38 +233,6 @@ namespace GAP.Infrastructure.Migrations
                                     UserEntityUserId = 1L,
                                     Login = "admin",
                                     Password = "1h0ATANFe6x7kMHo1PURE74WI0ayevUwfK/+Ie+IWX/xWrFWngcVUwL/ewryn38EMVMQBFaNo4SaVwgXaBWnDw=="
-                                });
-                        });
-
-                    b.OwnsOne("GAP.Domain.ValueObjects.FullName", "FullName", b1 =>
-                        {
-                            b1.Property<long>("UserEntityUserId")
-                                .ValueGeneratedOnAdd()
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                            b1.Property<string>("Name")
-                                .IsRequired()
-                                .HasMaxLength(100);
-
-                            b1.Property<string>("Surname")
-                                .IsRequired()
-                                .HasMaxLength(200);
-
-                            b1.HasKey("UserEntityUserId");
-
-                            b1.ToTable("Users");
-
-                            b1.HasOne("GAP.Domain.UserEntity")
-                                .WithOne("FullName")
-                                .HasForeignKey("GAP.Domain.ValueObjects.FullName", "UserEntityUserId")
-                                .OnDelete(DeleteBehavior.Cascade);
-
-                            b1.HasData(
-                                new
-                                {
-                                    UserEntityUserId = 1L,
-                                    Name = "Administrator",
-                                    Surname = "Administrator"
                                 });
                         });
                 });

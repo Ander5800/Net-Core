@@ -10,47 +10,24 @@ namespace GAP.Domain
         public CustomerEntity
         (
             long customerId,
-            FullName fullName,
-            string email,
-            Status status,
-            string nit,
-            DateTime BirthDate
+            string fullName,
+            string email
         )
         {
             CustomerId = customerId;
             FullName = fullName;
             Email = email;
-            Nit = nit;
-            Status = status;
         }
 
         public CustomerEntity() { }
 
         public long CustomerId { get; private set; }
 
-        public FullName FullName { get; private set; }
+        public string FullName { get; private set; }
 
-        public string Email { get; private set; }
-
-        public Status Status { get; private set; }
-
-        public DateTime BirthDay { get; private set; }
-
-        public string Nit { get; private set; }
-
-        public DocumentType DocumentType { get; private set; }
+        public string Email { get; private set; }        
 
         public ICollection<AppointmentEntity> Appointments { get; private set; }
         
-        public void Add()
-        {
-            CustomerId = 0;
-            Status = Status.Active;
-        }
-
-        public void Inactivate()
-        {
-            Status = Status.Inactive;
-        }
     }
 }
