@@ -2,11 +2,8 @@
 
 namespace GAP.Model
 {
-    public sealed class AppointmentModel
+    public sealed class AddAppointmentModel
     {
-
-        public long AppointmentId { get; set; }
-
         public long CustomerId { get; set; }
 
         public DateTime AppointmentDate { get; set; }

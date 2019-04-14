@@ -10,5 +10,7 @@ namespace GAP.Application
         Task<PagedList<AppointmentModel>> ListAsync(PagedListParameters parameters);
 
         Task<IEnumerable<AppointmentModel>> ListAsync(long customerId);
+
+        Task<IDataResult<long>> AddAsync(AddAppointmentModel addAppointmentModel);
     }
 }

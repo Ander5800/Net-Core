@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GAP.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20190414202532_InitialCreate")]
+    [Migration("20190414231356_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,13 +33,9 @@ namespace GAP.Infrastructure.Migrations
 
                     b.Property<int>("DepartmentTypeId");
 
-                    b.Property<int>("Status");
-
                     b.HasKey("AppointmentId");
 
                     b.HasIndex("CustomerId");
-
-                    b.HasIndex("DepartmentTypeId");
 
                     b.ToTable("Appointments");
                 });
@@ -94,11 +90,17 @@ namespace GAP.Infrastructure.Migrations
                     b.Property<int>("Id")
                         .HasDefaultValue(1);
 
+                    b.Property<long?>("DepartmentTypeId");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(200);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DepartmentTypeId")
+                        .IsUnique()
+                        .HasFilter("[DepartmentTypeId] IS NOT NULL");
 
                     b.ToTable("departments");
 
@@ -162,11 +164,13 @@ namespace GAP.Infrastructure.Migrations
                         .WithMany("Appointments")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
 
-                    b.HasOne("GAP.Domain.DepartmentType", "Department")
-                        .WithMany()
-                        .HasForeignKey("DepartmentTypeId")
-                        .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity("GAP.Domain.DepartmentType", b =>
+                {
+                    b.HasOne("GAP.Domain.AppointmentEntity")
+                        .WithOne("Department")
+                        .HasForeignKey("GAP.Domain.DepartmentType", "DepartmentTypeId");
                 });
 
             modelBuilder.Entity("GAP.Domain.UserEntity", b =>

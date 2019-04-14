@@ -9,7 +9,7 @@ namespace GAP.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AppointmentsController : ControllerBase
+    public class AppointmentsController : BaseController
     {
         private IAppointmentApplicationService AppointmentApplicationService { get; }
 
@@ -28,6 +28,12 @@ namespace GAP.Web.Controllers
         public async Task<IEnumerable<AppointmentModel>> Get(long customerId)
         {
             return await AppointmentApplicationService.ListAsync(customerId);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddAsync(AddAppointmentModel addAppointmentModel)
+        {
+            return Result(await AppointmentApplicationService.AddAsync(addAppointmentModel));
         }
     }
 }

@@ -26,11 +26,11 @@ export class AppointmentsComponent implements OnInit {
   }
 
   add(appointment: Appointment) {
-    // this.loading = true;
-    // this.appointmentService
-    //   .add(appointment)
-    //   .pipe(finalize(() => (this.loading = false)))
-    //   .subscribe(addedCustomer => (this.appointments = this.appointments.concat(addedCustomer)));
+    this.loading = true;
+    this.appointmentService
+      .add(appointment)
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe(addedCustomer => (this.appointments = this.appointments.concat(addedCustomer)));
     this.appointments = [...this.appointments, appointment];
   }
 

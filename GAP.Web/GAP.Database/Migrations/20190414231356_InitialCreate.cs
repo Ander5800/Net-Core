@@ -23,18 +23,6 @@ namespace GAP.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "departments",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false, defaultValue: 1),
-                    Name = table.Column<string>(maxLength: 200, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_departments", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -60,7 +48,6 @@ namespace GAP.Infrastructure.Migrations
                     AppointmentId = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CustomerId = table.Column<long>(nullable: false),
-                    Status = table.Column<int>(nullable: false),
                     AppointmentDate = table.Column<DateTime>(nullable: false),
                     DepartmentTypeId = table.Column<int>(nullable: false)
                 },
@@ -73,12 +60,25 @@ namespace GAP.Infrastructure.Migrations
                         principalTable: "Customers",
                         principalColumn: "CustomerId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "departments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false, defaultValue: 1),
+                    Name = table.Column<string>(maxLength: 200, nullable: false),
+                    DepartmentTypeId = table.Column<long>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_departments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Appointments_departments_DepartmentTypeId",
+                        name: "FK_departments_Appointments_DepartmentTypeId",
                         column: x => x.DepartmentTypeId,
-                        principalTable: "departments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalTable: "Appointments",
+                        principalColumn: "AppointmentId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
@@ -99,13 +99,13 @@ namespace GAP.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "departments",
-                columns: new[] { "Id", "Name" },
+                columns: new[] { "Id", "DepartmentTypeId", "Name" },
                 values: new object[,]
                 {
-                    { 1, "General" },
-                    { 2, "Odontology" },
-                    { 3, "Pediatrics" },
-                    { 4, "Neurology" }
+                    { 1, null, "General" },
+                    { 2, null, "Odontology" },
+                    { 3, null, "Pediatrics" },
+                    { 4, null, "Neurology" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -114,9 +114,11 @@ namespace GAP.Infrastructure.Migrations
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Appointments_DepartmentTypeId",
-                table: "Appointments",
-                column: "DepartmentTypeId");
+                name: "IX_departments_DepartmentTypeId",
+                table: "departments",
+                column: "DepartmentTypeId",
+                unique: true,
+                filter: "[DepartmentTypeId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_Email",
@@ -134,16 +136,16 @@ namespace GAP.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Appointments");
+                name: "departments");
 
             migrationBuilder.DropTable(
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Customers");
+                name: "Appointments");
 
             migrationBuilder.DropTable(
-                name: "departments");
+                name: "Customers");
         }
     }
 }

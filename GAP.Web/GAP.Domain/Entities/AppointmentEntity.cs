@@ -7,18 +7,14 @@ namespace GAP.Domain
     {
         public AppointmentEntity
         (
-            long appointmentId,
             long customerId,
             DateTime appointmentDate,
-            Status status,
-            DepartmentType department
+            int departmentTypeId
         )
         {
-            AppointmentId = appointmentId;
             CustomerId = customerId;
             AppointmentDate = appointmentDate;
-            Status = status;
-            Department = department;
+            DepartmentTypeId = departmentTypeId;
         }
 
         public AppointmentEntity() { }
@@ -27,23 +23,12 @@ namespace GAP.Domain
 
         public long CustomerId { get; private set; }
 
-        public Status Status { get; private set; }
+        public int DepartmentTypeId { get; private set; }
 
         public DateTime AppointmentDate { get; private set; }
 
         public CustomerEntity Customer { get; private set; }
 
-        public DepartmentType Department { get; private set; } = DepartmentType.General;
-
-        public void Add()
-        {
-            CustomerId = 0;
-            Status = Status.Active;
-        }
-
-        public void Inactivate()
-        {
-            Status = Status.Inactive;
-        }
+        public DepartmentType Department { get; private set; }
     }
 }
