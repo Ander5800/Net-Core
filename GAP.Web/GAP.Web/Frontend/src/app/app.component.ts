@@ -1,10 +1,8 @@
-import { Component } from "@angular/core";
-import { Meta } from "@angular/platform-browser";
-import { environment } from "../environments/environment";
+import { Component } from '@angular/core';
 
-@Component({ selector: "app-root", templateUrl: "./app.component.html" })
-export class AppComponent {
-    constructor(private readonly meta: Meta) {
-        this.meta.addTag({ name: "environment", content: environment.name });
-    }
-}
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
+})
+export class AppComponent {}

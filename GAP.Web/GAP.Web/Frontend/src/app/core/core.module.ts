@@ -1,29 +1,29 @@
-import { CommonModule } from "@angular/common";
-import { HttpClientModule } from "@angular/common/http";
-import { NgModule } from "@angular/core";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { AppGuardsModule } from "./guards/guards.module";
-import { AppHandlersModule } from "./handlers/handlers.module";
-import { AppInterceptorsModule } from "./interceptors/interceptors.module";
+import { CommonModule } from '@angular/common';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { MaterialModule } from '../material/material.module';
+import { SharedModule } from '../shared/shared.module';
+import { ModalComponent } from './modal/modal.component';
+import { throwIfAlreadyLoaded } from './module-import-check';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
-    exports: [
-        CommonModule,
-        FormsModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        AppGuardsModule,
-        AppHandlersModule,
-        AppInterceptorsModule
-    ],
-    imports: [
-        CommonModule,
-        FormsModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        AppGuardsModule,
-        AppHandlersModule,
-        AppInterceptorsModule
-    ]
+  imports: [
+    CommonModule,
+    SharedModule,
+    MaterialModule,
+    RouterModule // because we use <router-outlet> and routerLink
+  ],
+  declarations: [ModalComponent, ToolbarComponent],
+  exports: [ToolbarComponent],
+  entryComponents: [ModalComponent]
 })
-export class AppCoreModule { }
+export class CoreModule {
+  constructor(
+    @Optional()
+    @SkipSelf()
+    parentModule: CoreModule
+  ) {
+    throwIfAlreadyLoaded(parentModule, 'CoreModule');
+  }
+}

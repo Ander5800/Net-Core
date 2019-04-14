@@ -1,0 +1,49 @@
+<!-- <mat-card>
+  <mat-card-header>
+    <mat-card-title>Customers</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <ul class="customers">
+      <li *ngFor="let customer of customers; trackBy: byId" class="item-container">
+       
+        <div class="selectable-item" [class.selected]="customer === selectedCustomer" (click)="select(customer)">
+          <div class="badge">{{customer.customerId}}</div>
+          <div class="item-text">
+            <div class="name">{{customer.fullName}}</div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </mat-card-content>
+</mat-card> -->
+
+<table mat-table [dataSource]="customers" class="mat-elevation-z8">
+
+
+    <ng-container matColumnDef="nit">
+        <th mat-header-cell *matHeaderCellDef> Nit. </th>
+        <td mat-cell *matCellDef="let element"> {{element.nit}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.fullName.name}} {{element.fullName.surname}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="active">
+        <th mat-header-cell *matHeaderCellDef> Active </th>
+        <td mat-cell *matCellDef="let element"> {{element.active}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element">
+            <mat-icon matTooltip="Edit Customer" class="pointer">edit</mat-icon>
+            <mat-icon matTooltip="Add Appointment" class="pointer">assignment</mat-icon>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

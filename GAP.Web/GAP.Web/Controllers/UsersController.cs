@@ -24,5 +24,11 @@ namespace GAP.Web.Controllers
         {
             return Result(await UserApplicationService.SignInJwtAsync(signInModel));
         }
+
+        [HttpPost("SignOut")]
+        public Task SignOutAsync()
+        {
+            return UserApplicationService.SignOutAsync(new SignOutModel(SignedInModel.UserId));
+        }
     }
 }

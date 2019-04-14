@@ -1,0 +1,19 @@
+<div class="content-container">
+    <div class="button-panel" *ngIf="!selected">
+        <button mat-raised-button type="button" (click)="getCustomers()" matTooltip="Refresh the customers">Refresh</button>
+        <button mat-raised-button color="primary" type="button" (click)="enableAddMode()" *ngIf="!selected" matTooltip="Add a new hero">Add</button>
+    </div>
+    <div *ngIf="selected" class="detail-container">
+        <app-customer-detail [customer]="selected" (unselect)="close()" (add)="add($event)" (update)="update($event)"></app-customer-detail>
+    </div>
+    <div *ngIf="!selected" class="list-container">
+        <div *ngIf="customers">
+            <mat-spinner *ngIf="loading;else customerList" mode="indeterminate" color="accent"></mat-spinner>
+            <ng-template #customerList>
+                <!-- <app-hero-list [heroes]="heroes" [selectedHero]="selected" (deleted)="delete($event)" (selected)="select($event)"></app-hero-list> -->
+                <app-customer-list [customers]="customers" [selectedCustomer]="selected" (selected)="select($event)">
+                </app-customer-list>
+            </ng-template>
+        </div>
+    </div>
+</div>
