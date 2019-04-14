@@ -33,6 +33,27 @@ namespace GAP.Infrastructure
                 });
             });
 
+            modelBuilder.Entity<Domain.DepartmentType>(x =>
+            {
+                x.HasData(new
+                {
+                    Id = 1,
+                    Name = "General",
+                }, new
+                {
+                    Id = 2,
+                    Name = "Odontology",
+                }, new
+                {
+                    Id = 3,
+                    Name = "Pediatrics",
+                }, new
+                {
+                    Id = 4,
+                    Name = "Neurology",
+                });
+            });
+
         }
     }
 }
