@@ -8,10 +8,7 @@ namespace GAP.Application
 {
     public sealed class CustomerApplicationService : BaseApplicationService, ICustomerApplicationService
     {
-        public CustomerApplicationService
-        (
-            ICustomerRepository customerRepository
-        )
+        public CustomerApplicationService(ICustomerRepository customerRepository)
         {
             CustomerRepository = customerRepository;
         }

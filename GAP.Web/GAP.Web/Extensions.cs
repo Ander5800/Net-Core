@@ -18,6 +18,7 @@ namespace GAP.Web
         public static void AddApplicationServices(this IServiceCollection services)
         {
             services.AddMatchingInterface(typeof(ICustomerApplicationService).Assembly);
+            services.AddMatchingInterface(typeof(IAppointmentApplicationService).Assembly);
             services.AddMatchingInterface(typeof(IUserApplicationService).Assembly);
         }
 
