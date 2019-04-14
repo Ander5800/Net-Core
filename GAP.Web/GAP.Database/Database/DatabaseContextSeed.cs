@@ -32,6 +32,7 @@ namespace GAP.Infrastructure
                     Password = "1h0ATANFe6x7kMHo1PURE74WI0ayevUwfK/+Ie+IWX/xWrFWngcVUwL/ewryn38EMVMQBFaNo4SaVwgXaBWnDw=="
                 });
             });
+
         }
     }
 }

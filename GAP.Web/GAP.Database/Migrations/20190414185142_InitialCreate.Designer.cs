@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GAP.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20190412202916_InitialCreate")]
+    [Migration("20190414185142_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,6 +30,9 @@ namespace GAP.Infrastructure.Migrations
                     b.Property<DateTime>("AppointmentDate");
 
                     b.Property<long>("CustomerId");
+
+                    b.Property<string>("Department")
+                        .IsRequired();
 
                     b.Property<int>("Status");
 

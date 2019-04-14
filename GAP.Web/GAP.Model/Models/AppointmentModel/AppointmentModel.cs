@@ -12,5 +12,7 @@ namespace GAP.Model
         public Status Status { get; set; }
 
         public DateTime AppointmentDate { get; set; }
+
+        public Department Department { get; set; }
     }
 }

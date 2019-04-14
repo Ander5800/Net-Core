@@ -29,6 +29,9 @@ namespace GAP.Infrastructure.Migrations
 
                     b.Property<long>("CustomerId");
 
+                    b.Property<string>("Department")
+                        .IsRequired();
+
                     b.Property<int>("Status");
 
                     b.HasKey("AppointmentId");

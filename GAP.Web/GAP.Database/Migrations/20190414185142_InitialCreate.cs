@@ -54,7 +54,8 @@ namespace GAP.Infrastructure.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CustomerId = table.Column<long>(nullable: false),
                     Status = table.Column<int>(nullable: false),
-                    AppointmentDate = table.Column<DateTime>(nullable: false)
+                    AppointmentDate = table.Column<DateTime>(nullable: false),
+                    Department = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {

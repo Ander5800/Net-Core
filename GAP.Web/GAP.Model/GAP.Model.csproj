@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Ardalis.SmartEnum" Version="1.0.7" />
     <PackageReference Include="DotNetCore.Security" Version="7.1.0" />
     <PackageReference Include="DotNetCore.Validation" Version="7.3.0" />
   </ItemGroup>

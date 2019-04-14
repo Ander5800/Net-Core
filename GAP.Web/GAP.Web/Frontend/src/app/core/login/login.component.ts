@@ -3,6 +3,7 @@ import { UserService } from '../user.service';
 import { SignIn } from '../../core';
 import { TokenService } from '../token.service';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,9 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.showSpinner = true;
     this.userService.signIn(this.signIn)
+      .pipe(finalize(() => this.showSpinner = false))
       .subscribe((tokenModel) => {
         if (tokenModel && tokenModel.token) {
           this.tokenService.set(tokenModel.token);
