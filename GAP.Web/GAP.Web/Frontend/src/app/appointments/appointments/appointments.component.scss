@@ -1,0 +1,12 @@
+@import '../../../styles/mixin';
+.button-panel>button {
+    margin-left: 1em;
+}
+
+.control-panel {
+    @include control-panel-layout;
+}
+
+.content-container {
+    @include content-container-layout;
+}

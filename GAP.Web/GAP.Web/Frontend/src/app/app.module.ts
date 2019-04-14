@@ -8,7 +8,8 @@ import { CoreModule } from './core';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'customers' },
-  { path: 'customers', loadChildren: 'app/customers/customers.module#CustomersModule' }
+  { path: 'customers', loadChildren: 'app/customers/customers.module#CustomersModule' },
+  { path: 'appointments', loadChildren: 'app/appointments/appointments.module#AppointmentsModule' }
 ];
 
 @NgModule({

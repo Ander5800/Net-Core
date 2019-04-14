@@ -40,7 +40,7 @@ export class CustomerService {
 
   update(customer: Customer) {
     return this.http
-      .put<Customer>(`${api}/hero/${customer.customerId}`, customer)
+      .put<Customer>(`${api}/customer/${customer.customerId}`, customer)
       .pipe(
         tap(() =>
           this.toastService.openSnackBar(`Customer ${customer.fullName} updated`, 'PUT')

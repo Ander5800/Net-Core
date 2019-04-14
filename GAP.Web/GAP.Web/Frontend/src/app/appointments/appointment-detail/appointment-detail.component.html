@@ -1,9 +1,9 @@
 <mat-card>
     <mat-card-header>
-        <mat-card-title>Customer Details</mat-card-title>
+        <mat-card-title>Appoinment Details</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <form [formGroup]="form" (ngSubmit)="saveCustomer(form)">
+        <form [formGroup]="form" (ngSubmit)="saveAppointment(form)">
             <div class="editfields">
                 <div [hidden]="addMode">
                     <mat-form-field>
@@ -12,12 +12,12 @@
                 </div>
                 <div>
                     <mat-form-field>
-                        <input matInput formControlName="name" placeholder="name" #name (keyup.esc)="close()" (keyup.enter)="saveCustomer(form)">
+                        <input matInput formControlName="name" placeholder="name" #name (keyup.esc)="close()" (keyup.enter)="saveAppointment(form)">
                     </mat-form-field>
                 </div>
                 <div>
                     <mat-form-field>
-                        <textarea matInput formControlName="saying" placeholder="saying" #saying (keyup.esc)="close()" (keyup.enter)="saveCustomer(form)"></textarea>
+                        <textarea matInput formControlName="saying" placeholder="saying" #saying (keyup.esc)="close()" (keyup.enter)="saveAppointment(form)"></textarea>
                     </mat-form-field>
                 </div>
             </div>

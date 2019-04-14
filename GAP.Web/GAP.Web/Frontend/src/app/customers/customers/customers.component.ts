@@ -41,7 +41,7 @@ export class CustomersComponent implements OnInit {
     this.customerService
       .getAll()
       .pipe(finalize(() => (this.loading = false)))
-      .subscribe(heroes => (this.customers = heroes));
+      .subscribe(customers => (this.customers = customers));
     this.close();
   }
 

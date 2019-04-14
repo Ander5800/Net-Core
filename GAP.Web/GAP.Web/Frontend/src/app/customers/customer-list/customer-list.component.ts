@@ -15,7 +15,7 @@ export class CustomerListComponent {
   @Output() deleted = new EventEmitter<Customer>();
   @Output() selected = new EventEmitter<Customer>();
 
-  displayedColumns: string[] = ['nit', 'name', 'active', 'actions'];
+  displayedColumns: string[] = ['nit', 'name', 'status', 'actions'];
 
   constructor(public dialog: MatDialog) { }
 
@@ -26,24 +26,4 @@ export class CustomerListComponent {
   select(customer: Customer) {
     this.selected.emit(customer);
   }
-
-  // deleteHero(customer: Customer) {
-  //   const dialogConfig = new MatDialogConfig();
-  //   dialogConfig.disableClose = true;
-  //   dialogConfig.autoFocus = true;
-  //   dialogConfig.width = '250px';
-  //   dialogConfig.data = {
-  //     title: 'Delete Hero',
-  //     message: `Do you want to delete ${customer.fullName}`
-  //   };
-
-  //   const dialogRef = this.dialog.open(ModalComponent, dialogConfig);
-
-  //   dialogRef.afterClosed().subscribe(deleteIt => {
-  //     console.log('The dialog was closed');
-  //     if (deleteIt) {
-  //       this.deleted.emit(customer);
-  //     }
-  //   });
-  // }
 }
