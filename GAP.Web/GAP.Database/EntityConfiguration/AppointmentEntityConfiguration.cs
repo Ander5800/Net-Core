@@ -17,9 +17,16 @@ namespace GAP.Infrastructure
             builder.Property(x => x.AppointmentId).IsRequired().ValueGeneratedOnAdd();
             builder.Property(x => x.CustomerId).IsRequired();
             builder.Property(x => x.AppointmentDate).IsRequired();
-            builder.Property(x => x.Department)
-                   .HasConversion(p => p.ToString(), p => (Department)Enum.Parse(typeof(Department), p)).IsRequired();
             builder.Property(x => x.Status).IsRequired();
+
+            builder.Property<int>("DepartmentTypeId")
+                .IsRequired();
+
+            builder.HasOne(p => p.Department)
+                .WithMany()
+                .HasForeignKey("DepartmentTypeId");
+
+            
             builder.HasOne(x => x.Customer).WithMany(x => x.Appointments).HasForeignKey(x => x.AppointmentId);
         }
     }

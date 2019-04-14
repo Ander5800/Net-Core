@@ -24,5 +24,27 @@ namespace GAP.Application
         {
             return await CustomerRepository.ListAsync<CustomerModel>();
         }
+
+        //public async Task<IDataResult<long>> AddAsync(AddCustomerModel addCustomerModel)
+        //{
+        //    var validation = new AddUserModelValidator().Valid(addUserModel);
+
+        //    if (!validation.Success)
+        //    {
+        //        return ErrorDataResult<long>(validation.Message);
+        //    }
+
+        //    UserDomainService.GenerateHash(addUserModel.SignIn);
+
+        //    var userEntity = UserEntityFactory.Create(addUserModel);
+
+        //    userEntity.Add();
+
+        //    await UserRepository.AddAsync(userEntity);
+
+        //    await DatabaseUnitOfWork.SaveChangesAsync();
+
+        //    return SuccessDataResult(userEntity.UserId);
+        //}
     }
 }

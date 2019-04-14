@@ -11,7 +11,7 @@ namespace GAP.Domain
             long customerId,
             DateTime appointmentDate,
             Status status,
-            Department department
+            DepartmentType department
         )
         {
             AppointmentId = appointmentId;
@@ -33,7 +33,7 @@ namespace GAP.Domain
 
         public CustomerEntity Customer { get; private set; }
 
-        public Department Department { get; private set; } = Department.General;
+        public DepartmentType Department { get; private set; } = DepartmentType.General;
 
         public void Add()
         {

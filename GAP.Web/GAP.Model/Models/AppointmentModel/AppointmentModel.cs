@@ -13,6 +13,6 @@ namespace GAP.Model
 
         public DateTime AppointmentDate { get; set; }
 
-        public Department Department { get; set; }
+        public DepartmentType Department { get; set; }
     }
 }

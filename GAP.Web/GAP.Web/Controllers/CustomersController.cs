@@ -29,5 +29,11 @@ namespace GAP.Web.Controllers
         {
             return await CustomerApplicationService.ListAsync();
         }
+
+        //[HttpPost]
+        //public void Post(AddCustomerModel addCustomerModel)
+        //{
+        //    return await CustomerApplicationService.AddAsync(addCustomerModel);
+        //}
     }
 }
