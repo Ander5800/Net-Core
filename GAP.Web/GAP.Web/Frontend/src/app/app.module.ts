@@ -17,11 +17,11 @@ const routes: Routes = [
     path: '', component: LayoutComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'customers', loadChildren: 'app/customers/customers.module#CustomersModule' },
-      { path: 'appointments/:id', loadChildren: 'app/appointments/appointments.module#AppointmentsModule' }
+      { path: 'customers', loadChildren: 'app/customers/customers.module#CustomersModule', canActivate: [AuthGuard] },
+      { path: 'appointments/:id', loadChildren: 'app/appointments/appointments.module#AppointmentsModule', canActivate: [AuthGuard] }
     ],
   },
-
+  { path: '**', redirectTo: 'login' }
 ];
 
 @NgModule({
