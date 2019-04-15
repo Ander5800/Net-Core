@@ -31,7 +31,8 @@ export class CustomerService {
       .post<Customer>(`${api}`, customer)
       .pipe(
         tap(() =>
-          this.toastService.openSnackBar(`Customer ${customer.fullName} added`, 'POST')
+          this.toastService.openSnackBar(`Customer ${customer.fullName} added`, 'POST'),
+          catchError(this.handleError.bind(this))
         )
       );
   }
@@ -41,14 +42,15 @@ export class CustomerService {
       .put<Customer>(`${api}/customer/${customer.customerId}`, customer)
       .pipe(
         tap(() =>
-          this.toastService.openSnackBar(`Customer ${customer.fullName} updated`, 'PUT')
+          this.toastService.openSnackBar(`Customer ${customer.fullName} updated`, 'PUT'),
+          catchError(this.handleError.bind(this))
         )
       );
   }
 
   private handleError(res: HttpErrorResponse) {
     if (res.status === 401) {
-      this.toastService.openSnackBar('Unauthorized', 'Error');
+      this.router.navigate(['/login']);
       return observableThrowError('Unauthorized');
     }
 

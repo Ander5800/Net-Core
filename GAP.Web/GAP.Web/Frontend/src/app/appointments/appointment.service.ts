@@ -22,7 +22,7 @@ export class AppointmentService {
       .get<Appointment[]>(url)
       .pipe(
         tap(() => this.toastService.openSnackBar(msg, 'GET')),
-        catchError(this.handleError)
+        catchError(this.handleError.bind(this))
       );
   }
 
@@ -32,7 +32,7 @@ export class AppointmentService {
       .pipe(
         tap(() =>
           this.toastService.openSnackBar(`Appointment added`, 'POST'),
-          catchError(this.handleError)
+          catchError(this.handleError.bind(this))
         )
       );
   }
@@ -51,7 +51,7 @@ export class AppointmentService {
 
   private handleError(res: HttpErrorResponse) {
     if (res.status === 401) {
-      this.toastService.openSnackBar('Unauthorized', 'Error');
+      this.router.navigate(['/login']);
       return observableThrowError('Unauthorized');
     }
 
