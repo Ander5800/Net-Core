@@ -29,18 +29,18 @@ namespace GAP.Application
             return await AppointmentRepository.GetByCustomerId(customerId);
         }
 
-        public async Task<IDataResult<AppointmentModel>> AddAsync(AddAppointmentModel addAppointmentModel)
+        public async Task<IResult> AddAsync(AddAppointmentModel addAppointmentModel)
         {
-            //var validation = new AddUserModelValidator().Valid(addUserModel);
-
-            //if (!validation.Success)
-            //{
-            //    return ErrorDataResult<long>(validation.Message);
-            //}
-
-            //UserDomainService.GenerateHash(addUserModel.SignIn);
-
             var appointmentEntity = AppointmentFactory.Create(addAppointmentModel);
+            var appointments = await AppointmentRepository.GetByCustomerId(addAppointmentModel.CustomerId);
+
+
+
+            if (!appointmentEntity.canCreate(appointments))
+            {
+                return ErrorResult(Texts.AppointmentCanNotBeCreated);
+            }
+
             await AppointmentRepository.AddAsync(appointmentEntity);
             await DatabaseUnitOfWork.SaveChangesAsync();
             var appointment = await AppointmentRepository.SelectAsync<AppointmentModel>(appointmentEntity.AppointmentId);
@@ -49,10 +49,16 @@ namespace GAP.Application
 
         public async Task<IResult> DeleteAsync(long appointmentId)
         {
-            var appointment = await AppointmentRepository.SelectAsync<AppointmentModel>(appointmentId);
-            if (appointment == null)
+            var appointment = await AppointmentRepository.SelectAsync<AppointmentEntity>(appointmentId);
+            
+            if(appointment == null)
             {
                 return ErrorResult(Texts.AppointmentNotFound);
+            }
+
+            if (!appointment.canBeDeleted())
+            {
+                return ErrorResult(Texts.AppointmentCanNotBeDeleted);
             }
 
             await AppointmentRepository.DeleteAsync(appointmentId);

@@ -61,6 +61,24 @@ namespace GAP.CrossCutting.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Customer has another appointment in the same day.
+        /// </summary>
+        public static string AppointmentCanNotBeCreated {
+            get {
+                return ResourceManager.GetString("AppointmentCanNotBeCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Can not be deleted.
+        /// </summary>
+        public static string AppointmentCanNotBeDeleted {
+            get {
+                return ResourceManager.GetString("AppointmentCanNotBeDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Appointment not found.
         /// </summary>
         public static string AppointmentNotFound {

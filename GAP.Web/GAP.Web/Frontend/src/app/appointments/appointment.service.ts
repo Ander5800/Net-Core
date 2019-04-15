@@ -31,21 +31,19 @@ export class AppointmentService {
       .post<Appointment>(`${api}`, appointment)
       .pipe(
         tap(() =>
-          this.toastService.openSnackBar(`Appointment added`, 'POST'),
-          catchError(this.handleError.bind(this))
+          this.toastService.openSnackBar(`Appointment added`, 'POST')),
+        catchError(this.handleError.bind(this)
         )
       );
   }
 
   delete(appointmentId: number) {
-    appointmentId = 1000;
     return this.http
       .delete<number>(`${api}/${appointmentId}`)
       .pipe(
         tap(() =>
-          this.toastService.openSnackBar(`Appointment deleted`, 'DELETE'),
-          catchError(this.handleError.bind(this))
-        )
+          this.toastService.openSnackBar(`Appointment deleted`, 'DELETE')),
+        catchError(this.handleError.bind(this))
       );
   }
 

@@ -11,7 +11,7 @@ namespace GAP.Application
 
         Task<IEnumerable<AppointmentModel>> ListAsync(long customerId);
 
-        Task<IDataResult<AppointmentModel>> AddAsync(AddAppointmentModel addAppointmentModel);
+        Task<IResult> AddAsync(AddAppointmentModel addAppointmentModel);
 
         Task<IResult> DeleteAsync(long appointmentId);
     }
