@@ -20,6 +20,7 @@ namespace GAP.Web
             services.AddMatchingInterface(typeof(ICustomerApplicationService).Assembly);
             services.AddMatchingInterface(typeof(IAppointmentApplicationService).Assembly);
             services.AddMatchingInterface(typeof(IUserApplicationService).Assembly);
+            services.AddMatchingInterface(typeof(IDepartmentApplicationService).Assembly);
         }
 
         public static void AddDatabaseContext(this IServiceCollection services, IConfiguration configuration)

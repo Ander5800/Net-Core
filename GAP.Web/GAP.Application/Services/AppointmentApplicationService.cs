@@ -9,8 +9,7 @@ namespace GAP.Application
 {
     public sealed class AppointmentApplicationService : BaseApplicationService, IAppointmentApplicationService
     {
-        public AppointmentApplicationService(IAppointmentRepository appointmentRepository, 
-            IDatabaseUnitOfWork databaseUnitOfWork)
+        public AppointmentApplicationService(IAppointmentRepository appointmentRepository, IDatabaseUnitOfWork databaseUnitOfWork)
         {
             AppointmentRepository = appointmentRepository;
             DatabaseUnitOfWork = databaseUnitOfWork;

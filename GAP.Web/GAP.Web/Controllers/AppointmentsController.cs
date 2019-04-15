@@ -34,6 +34,6 @@ namespace GAP.Web.Controllers
         public async Task<IActionResult> AddAsync(AddAppointmentModel addAppointmentModel)
         {
             return Result(await AppointmentApplicationService.AddAsync(addAppointmentModel));
-        }
+        }        
     }
 }
