@@ -23,7 +23,7 @@ export class UserService {
       .post<Token>(`${api}SignIn`, signInModel)
       .pipe(
         tap(() => this.toastService.openSnackBar(msg, 'GET')),
-        catchError(this.handleError)
+        catchError(this.handleError.bind(this))
       );
   }
 
@@ -39,6 +39,7 @@ export class UserService {
   private handleError(res: HttpErrorResponse) {
     if (res.status === 401) {
       this.router.navigate(['/login']);
+      return observableThrowError('Unauthorized');
     }
 
     this.toastService.openSnackBar(res.error, 'Error');
