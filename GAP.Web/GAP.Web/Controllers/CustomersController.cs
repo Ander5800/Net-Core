@@ -1,6 +1,7 @@
 ﻿using DotNetCore.Objects;
 using GAP.Application;
 using GAP.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace GAP.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CustomersController : BaseController
     {
         private ICustomerApplicationService CustomerApplicationService { get; }

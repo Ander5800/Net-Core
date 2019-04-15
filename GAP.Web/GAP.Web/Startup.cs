@@ -33,10 +33,10 @@ namespace GAP.Web
             services.AddDatabaseContext(Configuration);
             services.AddDatabaseServices();
             services.AddDomainServices();
+            services.AddJsonWebToken();
+            services.AddAuthenticationJwtBearer();
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            //services.AddSpa();
-            //services.AddDatabaseServices();
-            //services.AddDatabaseContext(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,7 +56,7 @@ namespace GAP.Web
             .AllowAnyHeader()
             .AllowAnyMethod()
             );
-
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
         }

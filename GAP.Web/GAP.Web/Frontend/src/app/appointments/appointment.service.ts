@@ -5,12 +5,15 @@ import { catchError, tap } from 'rxjs/operators';
 
 import { ToastService } from '../core';
 import { Appointment } from '../core';
+import { Router } from '@angular/router';
 
 const api = 'http://localhost:50448/api/appointments';
 
 @Injectable({ providedIn: 'root' })
 export class AppointmentService {
-  constructor(private http: HttpClient, private toastService: ToastService) { }
+  constructor(private http: HttpClient,
+    private toastService: ToastService,
+    private router: Router) { }
 
   getAll(customerId: number) {
     const url = `${api}/${customerId}`;
@@ -21,12 +24,6 @@ export class AppointmentService {
         tap(() => this.toastService.openSnackBar(msg, 'GET')),
         catchError(this.handleError)
       );
-  }
-
-  private handleError(res: HttpErrorResponse) {
-    console.error(res.error);
-    this.toastService.openSnackBar(res.error, 'Error');
-    return observableThrowError(res.error || 'Server error');
   }
 
   add(appointment: Appointment) {
@@ -41,13 +38,24 @@ export class AppointmentService {
   }
 
   delete(appointmentId: number) {
+    appointmentId = 1000;
     return this.http
       .delete<number>(`${api}/${appointmentId}`)
       .pipe(
         tap(() =>
           this.toastService.openSnackBar(`Appointment deleted`, 'DELETE'),
-          catchError(this.handleError)
+          catchError(this.handleError.bind(this))
         )
       );
+  }
+
+  private handleError(res: HttpErrorResponse) {
+    if (res.status === 401) {
+      this.toastService.openSnackBar('Unauthorized', 'Error');
+      return observableThrowError('Unauthorized');
+    }
+
+    this.toastService.openSnackBar(res.error, 'Error');
+    return observableThrowError(res.error || 'Server error');
   }
 }

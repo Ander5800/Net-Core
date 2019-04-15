@@ -1,16 +1,19 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { throwError as observableThrowError } from 'rxjs';
+import { throwError as observableThrowError, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { ToastService } from '../core';
 import { Customer } from '../core';
+import { Router } from '@angular/router';
 
 const api = 'http://localhost:50448/api/customers';
 
 @Injectable({ providedIn: 'root' })
 export class CustomerService {
-  constructor(private http: HttpClient, private toastService: ToastService) {}
+  constructor(private http: HttpClient,
+    private toastService: ToastService,
+    private router: Router) { }
 
   getAll() {
     const url = `${api}`;
@@ -19,13 +22,8 @@ export class CustomerService {
       .get<Customer[]>(url)
       .pipe(
         tap(() => this.toastService.openSnackBar(msg, 'GET')),
-        catchError(this.handleError)
+        catchError(this.handleError.bind(this))
       );
-  }
-
-  private handleError(res: HttpErrorResponse) {
-    console.error(res.error);
-    return observableThrowError(res.error || 'Server error');
   }
 
   add(customer: Customer) {
@@ -47,4 +45,16 @@ export class CustomerService {
         )
       );
   }
+
+  private handleError(res: HttpErrorResponse) {
+    if (res.status === 401) {
+      this.toastService.openSnackBar('Unauthorized', 'Error');
+      return observableThrowError('Unauthorized');
+    }
+
+    this.toastService.openSnackBar(res.error, 'Error');
+    return observableThrowError(res.error || 'Server error');
+  }
 }
+
+

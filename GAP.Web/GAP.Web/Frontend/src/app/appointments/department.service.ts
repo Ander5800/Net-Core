@@ -5,12 +5,15 @@ import { catchError } from 'rxjs/operators';
 
 import { ToastService } from '../core';
 import { Department } from '../core';
+import { Router } from '@angular/router';
 
 const api = 'http://localhost:50448/api/departments';
 
 @Injectable({ providedIn: 'root' })
 export class DepartmentService {
-  constructor(private http: HttpClient, private toastService: ToastService) { }
+  constructor(private http: HttpClient,
+    private toastService: ToastService,
+    private router: Router) { }
 
   getAll() {
     const url = `${api}`;
@@ -22,7 +25,10 @@ export class DepartmentService {
   }
 
   private handleError(res: HttpErrorResponse) {
-    console.error(res.error);
+    if (res.status === 401) {
+      this.router.navigate(['/login']);
+    }
+
     this.toastService.openSnackBar(res.error, 'Error');
     return observableThrowError(res.error || 'Server error');
   }

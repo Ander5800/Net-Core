@@ -37,8 +37,11 @@ export class UserService {
   }
 
   private handleError(res: HttpErrorResponse) {
-    console.error(res.error);
-    // this.toastService.openSnackBar(res.error, 'Error');
+    if (res.status === 401) {
+      this.router.navigate(['/login']);
+    }
+
+    this.toastService.openSnackBar(res.error, 'Error');
     return observableThrowError(res.error || 'Server error');
   }
 }
