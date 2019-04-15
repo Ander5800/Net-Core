@@ -10,19 +10,15 @@
     <div class="detail-container">
         <app-appointment-detail [appointment]="selected"
             (unselect)="close()"
-            (add)="add($event)"
-            (update)="update($event)"></app-appointment-detail>
+            (add)="add($event)"></app-appointment-detail>
     </div>
     <div class="list-container">
         <div *ngIf="appointments">
-            <mat-spinner *ngIf="loading;else appointmentList"
-                mode="indeterminate"
-                color="accent"></mat-spinner>
-            <ng-template #appointmentList>
-                <app-appointment-list [appointments]="appointments"
-                    [selectedAppointment]="selected"
-                    (selected)="select($event)"></app-appointment-list>
-            </ng-template>
+
+            <app-appointment-list [appointments]="appointments"
+                [selectedAppointment]="selected"
+                (selected)="select($event)"
+                (deleted)="delete($event)"></app-appointment-list>
         </div>
     </div>
 </div>

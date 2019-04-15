@@ -1,4 +1,5 @@
 ﻿using DotNetCore.Objects;
+using GAP.CrossCutting.Resources;
 using GAP.Domain;
 using GAP.Infrastructure;
 using GAP.Model;
@@ -28,7 +29,7 @@ namespace GAP.Application
             return await AppointmentRepository.GetByCustomerId(customerId);
         }
 
-        public async Task<IDataResult<long>> AddAsync(AddAppointmentModel addAppointmentModel)
+        public async Task<IDataResult<AppointmentModel>> AddAsync(AddAppointmentModel addAppointmentModel)
         {
             //var validation = new AddUserModelValidator().Valid(addUserModel);
 
@@ -40,12 +41,24 @@ namespace GAP.Application
             //UserDomainService.GenerateHash(addUserModel.SignIn);
 
             var appointmentEntity = AppointmentFactory.Create(addAppointmentModel);
-
             await AppointmentRepository.AddAsync(appointmentEntity);
+            await DatabaseUnitOfWork.SaveChangesAsync();
+            var appointment = await AppointmentRepository.SelectAsync<AppointmentModel>(appointmentEntity.AppointmentId);
+            return SuccessDataResult(appointment);
+        }
 
+        public async Task<IResult> DeleteAsync(long appointmentId)
+        {
+            var appointment = await AppointmentRepository.SelectAsync<AppointmentModel>(appointmentId);
+            if (appointment == null)
+            {
+                return ErrorResult(Texts.AppointmentNotFound);
+            }
+
+            await AppointmentRepository.DeleteAsync(appointmentId);
             await DatabaseUnitOfWork.SaveChangesAsync();
 
-            return SuccessDataResult(appointmentEntity.AppointmentId);
+            return SuccessDataResult(appointmentId);
         }
     }
 }

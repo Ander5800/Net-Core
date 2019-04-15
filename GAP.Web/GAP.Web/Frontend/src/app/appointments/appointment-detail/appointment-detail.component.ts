@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, SimpleChanges, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { Appointment } from '../../core';
+import { Appointment, Department } from '../../core';
+import { DepartmentService } from '../department.service';
 
 @Component({
   selector: 'app-appointment-detail',
@@ -20,20 +21,18 @@ export class AppointmentDetailComponent implements OnChanges {
 
   @ViewChild('appointmentDate') nameElement: ElementRef;
 
-  foods;
+  departments: Department[];
 
   addMode = false;
   form = this.fb.group({
     appointmentDate: ['', Validators.required],
-    departmentId: ['', Validators.required]
+    department: ['', Validators.required]
   });
 
-  constructor(private fb: FormBuilder) {
-    this.foods = [
-      { value: 'steak-0', viewValue: 'Steak' },
-      { value: 'pizza-1', viewValue: 'Pizza' },
-      { value: 'tacos-2', viewValue: 'Tacos' }
-    ];
+  constructor(private fb: FormBuilder, private departmentService: DepartmentService) {
+
+    this.departmentService.getAll()
+      .subscribe(departments => this.departments = departments);
   }
 
   ngOnChanges(changes: SimpleChanges) {

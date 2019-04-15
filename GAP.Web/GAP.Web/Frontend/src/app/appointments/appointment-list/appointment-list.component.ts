@@ -25,4 +25,8 @@ export class AppointmentListComponent {
   select(appointment: Appointment) {
     this.selected.emit(appointment);
   }
+
+  delete(appointment: Appointment) {
+    this.deleted.emit(appointment);
+  }
 }

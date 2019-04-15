@@ -34,17 +34,19 @@ export class AppointmentService {
       .post<Appointment>(`${api}`, appointment)
       .pipe(
         tap(() =>
-          this.toastService.openSnackBar(`Appointment ${appointment.appointmentDate} added`, 'POST')
+          this.toastService.openSnackBar(`Appointment added`, 'POST'),
+          catchError(this.handleError)
         )
       );
   }
 
-  update(appointment: Appointment) {
+  delete(appointmentId: number) {
     return this.http
-      .put<Appointment>(`${api}/appointment/${appointment.appointmentId}`, appointment)
+      .delete<number>(`${api}/${appointmentId}`)
       .pipe(
         tap(() =>
-          this.toastService.openSnackBar(`Appointment ${appointment.appointmentDate} updated`, 'PUT')
+          this.toastService.openSnackBar(`Appointment deleted`, 'DELETE'),
+          catchError(this.handleError)
         )
       );
   }

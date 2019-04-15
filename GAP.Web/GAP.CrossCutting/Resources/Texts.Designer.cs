@@ -61,6 +61,15 @@ namespace GAP.CrossCutting.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Appointment not found.
+        /// </summary>
+        public static string AppointmentNotFound {
+            get {
+                return ResourceManager.GetString("AppointmentNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Login or password is invalid..
         /// </summary>
         public static string AuthenticationInvalid {

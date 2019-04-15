@@ -34,6 +34,12 @@ namespace GAP.Web.Controllers
         public async Task<IActionResult> AddAsync(AddAppointmentModel addAppointmentModel)
         {
             return Result(await AppointmentApplicationService.AddAsync(addAppointmentModel));
-        }        
+        }
+
+        [HttpDelete("{appointmentId}")]
+        public async Task<IActionResult> DeleteAsync(long appointmentId)
+        {
+            return Result(await AppointmentApplicationService.DeleteAsync(appointmentId));
+        }
     }
 }

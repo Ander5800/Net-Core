@@ -26,12 +26,12 @@ export class AppointmentsComponent implements OnInit {
   }
 
   add(appointment: Appointment) {
+    appointment.customerId = this.customerId;
     this.loading = true;
     this.appointmentService
       .add(appointment)
       .pipe(finalize(() => (this.loading = false)))
-      .subscribe(addedCustomer => (this.appointments = this.appointments.concat(addedCustomer)));
-    this.appointments = [...this.appointments, appointment];
+      .subscribe(addedCustomer => (this.appointments = [...this.appointments, addedCustomer]));
   }
 
   close() {
@@ -56,14 +56,10 @@ export class AppointmentsComponent implements OnInit {
     this.selected = appointment;
   }
 
-  update(appointment: Appointment) {
-    this.loading = true;
+  delete(appointmentDeleted: Appointment) {
     this.appointmentService
-      .update(appointment)
+      .delete(appointmentDeleted.appointmentId)
       .pipe(finalize(() => (this.loading = false)))
-      .subscribe(
-        () =>
-          (this.appointments = this.appointments.map(h => (h.appointmentId === appointment.appointmentId ? appointment : h)))
-      );
+      .subscribe(appointmentId => this.appointments = this.appointments.filter(appointment => appointment.appointmentId !== appointmentId));
   }
 }
